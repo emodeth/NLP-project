@@ -19,6 +19,7 @@ async function postPDF(data) {
     console.error("Error:", error);
   }
 }
+
 function AppProvider({ children }) {
   return (
     <AppContext.Provider value={{ postPDF }}>{children}</AppContext.Provider>
@@ -28,7 +29,7 @@ function AppProvider({ children }) {
 function useApp() {
   const context = useContext(AppContext);
   if (!context) return;
-  return AppContext;
+  return context;
 }
 
 export { AppProvider, useApp };
