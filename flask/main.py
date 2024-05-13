@@ -2,9 +2,10 @@ from distutils.log import debug
 from fileinput import filename 
 from flask import *  
 from pypdf import PdfReader 
+from flask_cors import CORS
 
-
-app = Flask(__name__)   
+app = Flask(__name__)  
+CORS(app, origins='http://localhost:3000')
   
 @app.route('/')   
 def main():   
@@ -14,13 +15,17 @@ def main():
 def success():   
     if request.method == 'POST':   
         f = request.files['file'] 
-        reader = PdfReader(f) 
-        page = reader.pages[0] 
+        #reader = PdfReader(f) 
+        #page = reader.pages[0] 
   
-        text = page.extract_text() 
-        print(text) 
+        #text = page.extract_text() 
+        #print(text) 
 
-        return Response("{'Status':'Retrieved'}",status=202)
+        if f:
+            print(f)
+            return Response("{'Status':'Retrieved'}",status=202)
+        else:
+            return Response("{'Status':'Patato'}",status=400)
   
 if __name__ == '__main__':   
     app.run(debug=True)

@@ -6,7 +6,10 @@ function UploadDropzone() {
   const { postPDF } = useApp();
 
   return (
-    <Dropzone multiple={false} onDrop={(acceptedFile) => postPDF(acceptedFile)}>
+    <Dropzone
+      multiple={false}
+      onDrop={(acceptedFile) => postPDF(acceptedFile[0])}
+    >
       {({ getRootProps, getInputProps, acceptedFiles }) => (
         <div
           {...getRootProps()}
